@@ -1,20 +1,56 @@
 'use client'
-import { useEffect, useRef } from 'react'
-import gsap from 'gsap'
+import { motion } from 'framer-motion'
+import Particles from 'react-tsparticles'
 
 export default function Hero() {
-  const titleRef = useRef(null)
-  const paraRef = useRef(null)
-
-  useEffect(() => {
-    gsap.fromTo(titleRef.current, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 1 })
-    gsap.fromTo(paraRef.current, { y: 30, opacity: 0 }, { y: 0, opacity: 1, delay: 0.5 })
-  }, [])
-
   return (
-    <section className="h-screen flex flex-col justify-center items-center bg-gradient-to-r from-blue-100 to-indigo-200">
-      <h1 ref={titleRef} className="text-5xl md:text-7xl font-bold mb-4">Fly High with Our Toy Plane</h1>
-      <p ref={paraRef} className="text-lg max-w-xl text-center">Experience smooth flight and high-quality design with our latest 3D modeled toy plane.</p>
+    <section className="relative h-screen flex flex-col justify-center items-center bg-gradient-to-br from-green-100 to-blue-200 overflow-hidden text-center">
+      <Particles
+        id="tsparticles"
+        className="absolute inset-0 z-0"
+        options={{
+          fullScreen: false,
+          background: { color: 'transparent' },
+          fpsLimit: 60,
+          particles: {
+            number: { value: 60, density: { enable: true, value_area: 800 } },
+            color: { value: ['#00d2ff', '#3a7bd5'] },
+            shape: { type: 'circle' },
+            opacity: {
+              value: 0.6,
+              random: true,
+              anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false },
+            },
+            size: {
+              value: 3,
+              random: true,
+              anim: { enable: true, speed: 4, size_min: 0.3, sync: false },
+            },
+            move: {
+              enable: true,
+              speed: 2,
+              direction: 'none',
+              out_mode: 'bounce',
+            },
+          },
+        }}
+      />
+      <motion.h1
+        className="text-5xl md:text-7xl font-bold z-10 text-gray-800"
+        initial={{ y: 50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
+        Fly High with Our Toy Plane
+      </motion.h1>
+      <motion.p
+        className="text-lg max-w-xl mt-4 text-gray-700 z-10"
+        initial={{ y: 30, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 1.2, delay: 0.4 }}
+      >
+        A realistic, interactive 3D model experience made for fun, learning, and creativity.
+      </motion.p>
     </section>
   )
 }
