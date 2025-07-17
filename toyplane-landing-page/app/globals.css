@@ -1,12 +1,17 @@
+/* ✅ Import Orbitron font */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ✅ Global Styles */
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Orbitron', sans-serif;
+  background-color: #f0f9ff;
   overflow-x: hidden;
 }

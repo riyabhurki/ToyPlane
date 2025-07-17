@@ -1,22 +1,17 @@
-'use client'
-import Navbar from '@/components/Navbar'
 import Hero from '@/components/Hero'
-import PlaneCanvas from '@/components/PlaneCanvas'
-import About from '@/components/About'
 import Features from '@/components/Features'
+import About from '@/components/About'
 import Contact from '@/components/Contact'
+import ScrollNav from '@/components/ScrollNav'
 
 export default function Home() {
   return (
-    <>
-      <Navbar />
-      <main className="pt-16">
-        <Hero />
-        <PlaneCanvas />
-        <About />
-        <Features />
-        <Contact />
-      </main>
-    </>
+    <main className="overflow-x-hidden relative">
+      <ScrollNav />
+      <Hero />
+      <Features />
+      <About />
+      <Contact />
+    </main>
   )
 }
