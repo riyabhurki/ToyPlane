@@ -22,10 +22,17 @@ export default function Hero() {
           show: { transition: { staggerChildren: 0.3 } },
         }}
       >
-        <motion.h1 variants={fadeInUp} className="text-5xl md:text-7xl font-extrabold text-gray-800">
+        <motion.h1
+          variants={fadeInUp}
+          className="text-5xl md:text-7xl font-extrabold text-blue-950 drop-shadow-lg"
+        >
           Fly High with Our Toy Plane
         </motion.h1>
-        <motion.p variants={fadeInUp} className="text-xl mt-4 text-gray-700 max-w-2xl mx-auto">
+
+        <motion.p
+          variants={fadeInUp}
+          className="text-xl mt-4 text-gray-900 max-w-2xl mx-auto bg-white/70 px-6 py-3 rounded-xl backdrop-blur-sm shadow-md"
+        >
           A realistic, interactive 3D model experience made for fun, learning, and creativity.
         </motion.p>
       </motion.div>
