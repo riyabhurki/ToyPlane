@@ -3,44 +3,38 @@ import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 
 export default function BackgroundEffects() {
-  const shapeRefs = useRef<Array<HTMLDivElement | null>>([])
+  const shapeRefs = useRef<HTMLDivElement[]>([])
 
   useEffect(() => {
-    gsap.to(shapeRefs.current, {
-      xPercent: mouse => (mouse.x - window.innerWidth/2) / -40,
-      yPercent: mouse => (mouse.y - window.innerHeight/2) / -40,
-      ease: 'power1.out',
-      stagger: { each: 0.1 },
-      repeat: -1,
-      duration: 3,
-    })
+    const handleMouseMove = (e: MouseEvent) => {
+      const x = (e.clientX - window.innerWidth / 2) / -40
+      const y = (e.clientY - window.innerHeight / 2) / -40
 
-    window.addEventListener('mousemove', e => {
       gsap.to(shapeRefs.current, {
-        xPercent: (e.clientX - window.innerWidth/2) / -40,
-        yPercent: (e.clientY - window.innerHeight/2) / -40,
+        xPercent: x,
+        yPercent: y,
         ease: 'power1.out',
+        stagger: { each: 0.1 },
+        overwrite: 'auto',
       })
-    })
+    }
 
-    return () => gsap.killTweensOf(shapeRefs.current)
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
 
   return (
-    <>
-      {[-1, 1, -0.5].map((scale, i) => (
+    <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0">
+      {[...Array(3)].map((_, i) => (
         <div
           key={i}
-          ref={el => (shapeRefs.current[i] = el)}
-          className="absolute z-0 rounded-full bg-blue-300 opacity-20 blur-2xl"
-          style={{
-            width: `${400 * Math.abs(scale)}px`,
-            height: `${400 * Math.abs(scale)}px`,
-            top: `${40 + i * 20}%`,
-            left: `${30 + i * 30}%`,
+          ref={el => {
+            if (el) shapeRefs.current[i] = el
           }}
+          className="absolute w-32 h-32 rounded-full bg-blue-300 opacity-30 blur-3xl"
+          style={{ top: `${20 + i * 50}px`, left: `${30 + i * 100}px` }}
         />
       ))}
-    </>
+    </div>
   )
 }
